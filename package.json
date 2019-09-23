@@ -1,18 +1,19 @@
 {
   "name": "@sagacious/utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "常用工具类",
   "main": "dist/index.js",
   "scripts": {
     "watch": "tsc -w",
     "build": "tsc"
   },
-  "keywords": ["utils"],
+  "keywords": [
+    "utils"
+  ],
   "author": "SagaciousLittle",
-  "repository" :
-  { 
-    "type" : "git",
-    "url" : "https://github.com/SagaciousLittle/sagacious-utils.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SagaciousLittle/sagacious-utils.git"
   },
   "license": "ISC"
 }
