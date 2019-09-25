@@ -1,6 +1,7 @@
 # 常用工具类
 ## 更新日志
 - **2019-09-25 新增OrderQuene类**
+- **2019-09-26 OrderQuene类新增stop，clear方法**
 - more...
 
 ## API
@@ -30,11 +31,15 @@ type ObjectUtilsRemoveOptions = {
 ### OrderQuene
 #### 顺序队列
 
-**1. init (quene: OrderQueneElement[], options: OrderQueneOptions) 初始化order quene**
+**1. init (quene: OrderQueneElement[], options: OrderQueneOptions): OrderQuene 初始化order quene，返回值：元素队列**
 
-**2. push (...quene: OrderQueneElement[]) 往队列里添加元素**
+**2. push (...quene: OrderQueneElement[]): this 往队列里添加元素**
 
-**3. async start (data: any) 开始执行队列**
+**3. start (data: any): void 开始执行队列**
+
+**4. stop (): void 停止执行队列，在元素stop回调执行完毕后停止**
+
+**4. clear (): OrderQueneElement[] 清空执行队列，在元素stop回调执行完毕后停止，返回值：未执行元素队列**
 
 #### 规则
 

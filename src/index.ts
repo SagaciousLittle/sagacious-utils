@@ -167,6 +167,8 @@ export class OrderQuene {
   }
   private clearable?: Promise<void>
   private timer?: number
+  private running: boolean = false
+  private cacheData: any
   constructor (quene: OrderQueneElement[], options: OrderQueneOptions) {
     if (quene instanceof Array) this.quene = quene
     this.options = {
@@ -180,11 +182,11 @@ export class OrderQuene {
    *
    * @static
    * @param {OrderQueneElement[]} quene
-   * @param {OrderQueneOptions} options
+   * @param {OrderQueneOptions} [options={}]
    * @returns
    * @memberof OrderQuene
    */
-  static init (quene: OrderQueneElement[], options: OrderQueneOptions) {
+  static init (quene: OrderQueneElement[], options: OrderQueneOptions = {}) {
     return new this(quene, options)
   }
 
@@ -196,10 +198,10 @@ export class OrderQuene {
    * @memberof OrderQuene
    */
   push (...quene: OrderQueneElement[]) {
-    if (!(quene instanceof Array)) return
+    if (!(quene instanceof Array)) return this
     const len = this.quene.length
     this.quene.push(...quene)
-    // 如果队列为空并且active存在，修改时间
+    // 队列最后一个元素执行时，控制时间
     if (len === 0 && this.active && this.clearable) {
       const {
         end,
@@ -208,10 +210,12 @@ export class OrderQuene {
         clearTimeout(this.timer)
         return Promise.resolve(end && await end())
           .then((data: any) => {
-            this.start(data)
+            this.next(data)
           })
       })
     }
+    // 队列中没有元素时,根据运行状态开始
+    if (len === 0 && !this.active && this.running) this.next(this.cacheData)
     return this
   }
 
@@ -219,10 +223,45 @@ export class OrderQuene {
    * 开始执行队列
    *
    * @param {*} data
+   * @memberof OrderQuene
+   */
+  start (data: any) {
+    if (!this.running) this.next(data || this.cacheData)
+    this.running = true
+  }
+
+
+  /**
+   * 停止执行队列，在元素stop回调执行完毕后停止
+   *
+   * @memberof OrderQuene
+   */
+  stop () {
+    this.running = false
+  }
+
+  /**
+   * 清空队列
+   *
+   * @returns 未执行元素
+   * @memberof OrderQuene
+   */
+  clear () {
+    const remainingPart = this.quene
+    this.quene = []
+    return OrderQuene.init(remainingPart)
+  }
+
+  /**
+   * 继续执行队列
+   *
+   * @param {*} data
    * @returns
    * @memberof OrderQuene
    */
-  async start (data: any) {
+  private async next (data: any) {
+    this.cacheData = data
+    if (!this.running) return
     this.active = this.quene.shift()
     if (this.active) {
       const {
@@ -248,8 +287,12 @@ export class OrderQuene {
         }, realDelay)
       })
         .then(data => {
-          this.start(data)
+          this.next(data)
         })
+    } else {
+      if (this.quene.length !== 0) {
+        this.next(data)
+      }
     }
   }
 }
