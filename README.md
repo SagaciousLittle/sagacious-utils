@@ -1,4 +1,8 @@
 # 常用工具类
+## 相关信息
+- [npm](https://www.npmjs.com/package/@sagacious/utils)
+
+
 ## 更新日志
 - **2019-09-25 新增OrderQuene类**
 - **2019-09-26 OrderQuene类新增stop，clear方法**
