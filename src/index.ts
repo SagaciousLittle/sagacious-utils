@@ -226,8 +226,11 @@ export class OrderQuene {
    * @memberof OrderQuene
    */
   start (data: any) {
-    if (!this.running) this.next(data || this.cacheData)
+    const {
+      running,
+    } = this
     this.running = true
+    if (!running) this.next(data || this.cacheData)
   }
 
 
