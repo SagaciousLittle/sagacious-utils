@@ -4,6 +4,7 @@
 
 
 ## 更新日志
+- **2019-09-27 新增MathUtils类**
 - **2019-09-25 新增OrderQuene类**
 - **2019-09-26 OrderQuene类新增stop，clear方法**
 - more...
@@ -12,11 +13,11 @@
 ### ObjectUtils
 #### 操作对象工具类
 
-**1. init (target: Object) 初始化工具类**
+**1. init (target: Object): ObjectUtils 初始化工具类**
 
-**2. val () 获取处理后的值**
+**2. val (): ObjectTarget 获取处理后的值**
 
-**3. removeEmpty () 去除对象中的非零不规范数据**
+**3. removeEmpty (): ObjectUtils 去除对象中的非零不规范数据**
 ```js
 type ObjectUtilsRemoveOptions = {
   /**
@@ -31,6 +32,15 @@ type ObjectUtilsRemoveOptions = {
 ```
 
 **4. static removeEmpty(target) 静态方法 去除对象中的非零不规范数据**
+
+### MathUtils
+#### 数学工具类
+
+**1. init (target: number): MathUtils 初始化工具类**
+
+**2. val (): number 获取处理后的值**
+
+**3. evaluate (formula: string): MathUtils 执行数学公式**
 
 ### OrderQuene
 #### 顺序队列
@@ -151,3 +161,4 @@ setTimeout(() => {
   })
 }, 9000)
 ```
+

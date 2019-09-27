@@ -1,4 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
+import math, {
+  MathJsStatic,
+} from 'mathjs'
 
 /**
  * hello world
@@ -26,6 +29,62 @@ type ObjectUtilsRemoveOptions = {
    * 是否处理数组，默认为true
    */
   operateArray?: boolean
+}
+
+/**
+ * 数学计算类，提供精确计算
+ *
+ * @export
+ * @class MathUtils
+ */
+export class MathUtils {
+  private math: MathJsStatic
+  private target: number
+  private static TYPE_ERROR = new Error('目标对象类型不为number')
+  constructor (target: number) {
+    target = Number(target)
+    if (Number.isNaN(target)) throw MathUtils.TYPE_ERROR
+    this.target = target
+    math.config({
+      number: 'BigNumber',
+      precision: 64,
+    })
+    this.math = math
+  }
+
+  /**
+   * 初始化目标数据
+   *
+   * @static
+   * @param {number} target
+   * @returns
+   * @memberof MathUtils
+   */
+  static init (target: number) {
+    return new this(target)
+  }
+
+  /**
+   * 执行数学公式
+   *
+   * @param {string} formula
+   * @returns
+   * @memberof MathUtils
+   */
+  evaluate (formula: string) {
+    this.target = Number(this.math.evaluate(formula))
+    return this
+  }
+
+  /**
+   * 获取目标数据
+   *
+   * @returns
+   * @memberof MathUtils
+   */
+  val () {
+    return this.target
+  }
 }
 
 /**
