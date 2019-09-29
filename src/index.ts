@@ -1,17 +1,9 @@
 import cloneDeep from 'lodash/cloneDeep'
-import math, {
+import {
+  create,
+  all,
   MathJsStatic,
 } from 'mathjs'
-
-/**
- * hello world
- *
- * @export
- * @returns {string}
- */
-export function helloworld () {
-  return 'hello world'
-}
 
 /**
  * 数学计算类，提供精确计算
@@ -20,18 +12,15 @@ export function helloworld () {
  * @class MathUtils
  */
 export class MathUtils {
-  private math: MathJsStatic
-  private target: number
-  private static TYPE_ERROR = new Error('目标对象类型不为number')
-  constructor (target: number) {
-    target = Number(target)
-    if (Number.isNaN(target)) throw MathUtils.TYPE_ERROR
-    this.target = target
-    math.config({
+  private math: Partial<MathJsStatic>
+  private target?: number
+  private static FORMULA_ERROR = new Error(`公式有误`)
+  constructor (target?: number) {
+    this.math = create(all, {
       number: 'BigNumber',
       precision: 64,
     })
-    this.math = math
+    this.target = target
   }
 
   /**
@@ -42,8 +31,10 @@ export class MathUtils {
    * @returns
    * @memberof MathUtils
    */
-  static init (target: number) {
-    return new this(target)
+  static init (target?: number | string) {
+    const _target = Number(target)
+    if (_target === undefined || !Number.isNaN(_target)) return new this(_target)
+    return new this().evaluate(target + '')
   }
 
   /**
@@ -54,7 +45,11 @@ export class MathUtils {
    * @memberof MathUtils
    */
   evaluate (formula: string) {
-    this.target = Number(this.math.evaluate(formula))
+    try {
+      this.target = Number(this.math.evaluate!(formula))
+    } catch (e) {
+      throw MathUtils.FORMULA_ERROR
+    }
     return this
   }
 
