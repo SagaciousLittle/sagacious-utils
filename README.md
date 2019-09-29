@@ -4,7 +4,7 @@
 
 
 ## 更新日志
-- **2019-09-29 ObjectUtilsl类 - removeEmpty API 新增处理后值配置项**
+- **2019-09-29 ObjectUtils类 - removeEmpty API 新增处理后值配置项，优化MathUtils类**
 - **2019-09-27 新增MathUtils类**
 - **2019-09-25 新增OrderQuene类**
 - **2019-09-26 OrderQuene类新增stop，clear方法**
