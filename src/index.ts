@@ -13,24 +13,6 @@ export function helloworld () {
   return 'hello world'
 }
 
-type ObjectTarget = {
-  [key: string]: any
-}
-
-/**
- * 对象操作类去除对象中的非零不规范数据配置
- */
-type ObjectUtilsRemoveOptions = {
-  /**
-   * 数组key
-   */
-  arrayKeys?: string[]
-  /**
-   * 是否处理数组，默认为true
-   */
-  operateArray?: boolean
-}
-
 /**
  * 数学计算类，提供精确计算
  *
@@ -87,6 +69,32 @@ export class MathUtils {
   }
 }
 
+type ObjectTarget = {
+  [key: string]: any
+}
+
+/**
+ * 对象操作类去除对象中的非零不规范数据配置
+ */
+type ObjectUtilsRemoveOptions = {
+  /**
+   * 处理后的值
+   */
+  targetVal?: any
+  /**
+   * 元素为数组的key
+   */
+  arrayKeys?: string[]
+  /**
+   * 数组处理后的值
+   */
+  arrayVal?: any[],
+  /**
+   * 对象为数组时是否处理，默认为true
+   */
+  operateArray?: boolean
+}
+
 /**
  * 对象操作类
  *
@@ -118,7 +126,7 @@ export class ObjectUtils {
   static init (target: ObjectTarget) {
     return new this(target)
   }
-  
+
   /**
    * 去除对象中的非零不规范数据
    *
@@ -136,28 +144,34 @@ export class ObjectUtils {
    * 去除对象中的非零不规范数据
    *
    * @param {ObjectUtilsRemoveOptions} [options={
+   *     targetVal: '-',
    *     arrayKeys: [],
+   *     arrayVal: [],
    *     operateArray: true,
    *   }]
    * @returns
    * @memberof ObjectUtils
    */
   removeEmpty (options: ObjectUtilsRemoveOptions = {
+    targetVal: '-',
     arrayKeys: [],
+    arrayVal: [],
     operateArray: true,
   }) {
     const {
       target,
     } = this
     const {
+      targetVal,
       arrayKeys,
+      arrayVal,
       operateArray,
     } = options
     Object.keys(target).forEach((k: string) => {
       if (typeof target[k] !== 'object' || target[k] === null) {
         if (!target[k] && target[k] !== 0) {
-          if (arrayKeys && arrayKeys.indexOf(k) > -1) target[k] = []
-          else if (!(target instanceof Array) || operateArray) target[k] = '-'
+          if (arrayKeys && arrayKeys.indexOf(k) > -1) target[k] = arrayVal
+          else if (!(target instanceof Array) || operateArray) target[k] = targetVal
         }
       } else {
         target[k] = ObjectUtils.removeEmpty(target[k]).val()
