@@ -48,7 +48,7 @@ export class MathUtils {
     try {
       this.target = Number(this.math.evaluate!(formula))
     } catch (e) {
-      throw MathUtils.FORMULA_ERROR
+      // throw MathUtils.FORMULA_ERROR
     }
     return this
   }

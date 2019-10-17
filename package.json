@@ -17,11 +17,18 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@types/mathjs": "^6.0.2",
     "lodash": "^4.17.15",
     "mathjs": "^6.2.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.139"
+    "@babel/core": "^7.6.4",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "^24.0.18",
+    "@types/lodash": "^4.14.139",
+    "@types/mathjs": "^6.0.2",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0"
   }
 }
