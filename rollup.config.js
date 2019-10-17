@@ -26,7 +26,7 @@ export default [
     input: 'src/index.ts',
     output: {
       name: 'utils',
-      format: 'es',
+      format: 'cjs',
       file: 'dist/utils.min.js',
     },
     plugins: [

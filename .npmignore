@@ -3,3 +3,5 @@ node_modules
 docs
 .editorconfig
 *.config.js
+.babelrc
+tsconfig.json
