@@ -1,6 +1,6 @@
 {
   "name": "@sagacious/utils",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "常用工具类",
   "main": "dist/utils.min.js",
   "scripts": {
