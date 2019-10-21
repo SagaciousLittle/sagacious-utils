@@ -5,7 +5,8 @@
   "main": "dist/utils.min.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && rollup -c"
+    "build": "yarn clean && rollup -c && rimraf.cmd dist/**/*.test.d.ts",
+    "test": "jest"
   },
   "keywords": [
     "utils"
@@ -21,9 +22,6 @@
     "mathjs": "^6.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.139",
     "@types/mathjs": "^6.0.2",
@@ -36,6 +34,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.24.3",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   }
 }
