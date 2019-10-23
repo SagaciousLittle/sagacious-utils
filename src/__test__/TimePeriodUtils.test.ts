@@ -1,4 +1,4 @@
-import TimePeriodUtils from './TimePeriodUtils'
+import TimePeriodUtils from '../TimePeriodUtils'
 import moment from 'moment'
 
 it('complePeriod and integrate', () => {

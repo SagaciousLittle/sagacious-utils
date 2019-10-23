@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "yarn clean && rollup -c && rimraf.cmd dist/**/*.test.d.ts",
-    "test": "jest"
+    "test": "jest",
+    "doc": "typedoc --options ./typedoc.js"
   },
   "keywords": [
     "utils"
@@ -36,6 +37,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.24.3",
     "ts-jest": "^24.1.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.6.4"
   }
 }
