@@ -1,4 +1,5 @@
 # 常用工具类
+[![CircleCI](https://circleci.com/gh/SagaciousLittle/sagacious-utils.svg?style=svg)](https://circleci.com/gh/SagaciousLittle/sagacious-utils)
 ## 相关信息
 - [npm](https://www.npmjs.com/package/@sagacious/utils)
 
@@ -21,4 +22,4 @@
 - more...
 
 ## API
-待维护
+more...
