@@ -46,7 +46,13 @@ export default [
     plugins: [
       Resolve(),
       Cjs(),
-      Ts(),
+      Ts({
+        tsconfigOverride: {
+          compilerOptions: {
+            declaration: false,
+          },
+        },
+      }),
       terser(),
       FileSize(),
     ],

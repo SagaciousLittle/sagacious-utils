@@ -13,7 +13,6 @@ import {
 export default class MathUtils {
   private math: Partial<MathJsStatic>
   private target?: number
-  private static FORMULA_ERROR = new Error(`公式有误`)
   constructor (target?: number) {
     this.math = create(all, {
       number: 'BigNumber',
@@ -44,12 +43,19 @@ export default class MathUtils {
    * @memberof MathUtils
    */
   evaluate (formula: string) {
-    try {
-      this.target = Number(this.math.evaluate!(formula))
-    } catch (e) {
-      // throw MathUtils.FORMULA_ERROR
-    }
+    let target = Number(this.math.evaluate!(formula))
+    if (!target || Number.isNaN(target)) throw new Error(`公式有误：${formula}`)
     return this
+  }
+
+  /**
+   * 设置target
+   *
+   * @param {number} target
+   * @memberof MathUtils
+   */
+  setTarget (target: number) {
+    this.target = target
   }
 
   /**
