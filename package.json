@@ -20,7 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.15",
-    "mathjs": "^6.2.2",
+    "mathjs": "^7.5.1",
     "moment": "^2.24.0"
   },
   "devDependencies": {
